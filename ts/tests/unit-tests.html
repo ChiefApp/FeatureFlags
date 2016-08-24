@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>Ng App Unit Tests</title>
+  <!--<script src="../node_modules/commonjs/lib/system.js"></script>-->
+
+  <link rel="stylesheet" href="../../node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
+  <script src="../../node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+  <script src="../../node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="../../node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+   <script src="../../node_modules/systemjs/dist/system.src.js"></script>
+   <script src="../../systemjs.config.js"></script>
+</head>
+<body>
+  <!--<script>
+    it('true is true', function(){ expect(true).toEqual(true); });
+  </script>-->
+  <!-- include spec files here... -->
+<!--<script src="testsbundle.js"></script>-->
+<!--<script src="../../js/FFlipper.js"></script>
+<script src="../../js/ffmodule.js"></script>
+<!--<script src="../js/tests/FFlipper.js"></script>-->
+<!--<script src="../../js/tests/FFlipper.spec.js"></script>-->
+ <script>
+      // System.import('app/tests/FFlipper.spec')
+      //         .catch(function(err){ console.error(err); });
+      System.import('app/tests/LocalFeatureLookup.spec')
+      .then(window.onload)
+              .catch(function(err){ console.error(err); });
+      // System.import('app/tests/FFClient.spec')
+      //         .then(window.onload)
+      //         .catch(function(err){ console.error(err); });
+</script>
+
+</body>
+</html>

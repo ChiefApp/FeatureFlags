@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": true,
+        "declaration":true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceRoot": "ts",
+        "outDir": "js"
+    },
+    "exclude": [
+        "node_modules",
+        "bower_components",
+        "jspm_packages",
+        "typings/**",
+        "node_modules/rxjs/Observable.d.ts",
+        "typings"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/1eaec643620630d410d3356c4b6a80ae09d79efb/fetch-mock/fetch-mock.d.ts",
+    "raw": "registry:dt/fetch-mock#5.0.0+20160724065250",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/1eaec643620630d410d3356c4b6a80ae09d79efb/fetch-mock/fetch-mock.d.ts"
+  }
+}
