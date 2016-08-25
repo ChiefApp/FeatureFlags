@@ -8,7 +8,7 @@ Typescript/Javascript client library for,
     - A/B testing
     - Toggle features for Paid vs Free vs Admin 
 
-```
+```Javascript
 {
     "featureKey" : "search"
     "enabled" : true
@@ -18,11 +18,13 @@ Typescript/Javascript client library for,
 ```
 
 ## Getting Started:
-Step 1:
-    `npm install https://github.com/MyLocalEnterprises/FeatureFlags.git`
+Step 1: 
+```sh 
+npm install https://github.com/MyLocalEnterprises/FeatureFlags.github
+```
 
 Step 2: Setup config
-```
+```Typescript
 import {FFModule} from "FFModule"
 
 let ffmodule = FFModule.config(
@@ -36,7 +38,7 @@ Step 3:
 ```
 let isSearchEnabled:Promise<Boolean> = ffmodule.isFeatureEnabled("search", "trial_user_1")
 ```
-```
+```Typescript
 // gets a single feature
 let searchFeature:Promise<Feature> = ffmodule.getFeature("search", "admin_user_1")
 
@@ -47,7 +49,7 @@ let enabledFeatures:Promise<FeatureFlags> = ffmodule.getEnabledFeatures("admin_u
 
 ## Examples:
 - In Typescript Projects:
-```
+```Typescript
 import {FFModule} from "FFModule"
 // set config
 
@@ -56,12 +58,12 @@ ffmodule.isFeatureEnabled("featureName", "customer_id_1")
 
 ```
 - In Javascript Projects:
-```
+```Typescript
 var FFModule = require('FFModule')
 ```
 
 <hr>
-## TODO: Custom offline class 
+Custom offline class 
     - Add a sample customFeatureLookup class to demonstrate this functionality
 <hr>
 
@@ -69,7 +71,7 @@ var FFModule = require('FFModule')
 ## API Contract: 
 BYO Feature Flag server.
 ```
-- /feature/:featureKey?devices=WEB&user_id=user-key
+- /feature/:featureKey?device=WEB&user_id=user-key
 - /features?enabled=true&user_id=user-key
 ```
 Models:
@@ -82,8 +84,10 @@ To run tests:
 `npm run karma`
 
 To run test coverage with remap:
-`npm run post`
-`npm run coverage`
+```sh
+npm run post
+npm run coverage
+```
 
 ## Resources: 
 Some resources to learn more about feature flags
