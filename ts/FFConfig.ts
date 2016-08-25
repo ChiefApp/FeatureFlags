@@ -4,14 +4,14 @@ import { IFeatureLookup } from './IFeatureLookup';
 export class FFConfig {
     device: DEVICES;
     url: string; // url
-    offlineFeatureLookup: IFeatureLookup;
+    customFeatureLookup: IFeatureLookup;
 
-    constructor(device: DEVICES = 'WEB',
+    constructor(device: DEVICES,
                 url: string,
-                offlineFeatureLookup?: IFeatureLookup) {
+                customFeatureLookup?: IFeatureLookup) {
         this.device = device;
         this.url = url;
-        this.offlineFeatureLookup = offlineFeatureLookup;
+        this.customFeatureLookup = customFeatureLookup;
     }
 
 }

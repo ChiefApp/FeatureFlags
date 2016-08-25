@@ -1,14 +1,20 @@
-import { DEVICES } from './Globals';
 import { Feature } from './models/Feature';
 import { FeatureFlags } from './models/FeatureFlags';
-export declare namespace FFModule {
-    function config(device?: DEVICES, url?: string, offlineFeatureLookup?: any): void;
-    function isFeatureEnabled(featureName: string, userID: string): Promise<Boolean>;
-    function getFeature(featureName: string, userID?: string): Promise<Feature>;
-    function getEnabledFeaturesFor(featureName: string, userID?: string): Promise<FeatureFlags>;
-    /**
-     * Convenience decorator for projects using typescript
-     */
-    function Feature(featureName: string, userID: string): (target: any, key: string) => void;
-    function FeatureFEnabled(featureName: string, userID: string): (target: any, key: string) => void;
+import { IFeatureLookup } from './IFeatureLookup';
+import { DEVICES } from './Globals';
+import { FFConfig } from './FFConfig';
+export declare class FFModule {
+    feature: Feature;
+    fflags: FeatureFlags;
+    isOffline: boolean;
+    config: FFConfig;
+    featureName: string;
+    userID: string;
+    featureLookupRepo: IFeatureLookup;
+    constructor(device: DEVICES, url: string, customFeatureLookup?: IFeatureLookup);
+    getFeature(featureName: string, userID?: string): Promise<Feature>;
+    getEnabledFeaturesFor(userID: any): Promise<FeatureFlags>;
+    isFeatureEnabled(featureName: string, userID: string): Promise<Boolean>;
+    Feature(featureName: string, userID: string): (target: any, key: string) => void;
+    FeatureFEnabled(featureName: string, userID: string): (target: any, key: string) => void;
 }

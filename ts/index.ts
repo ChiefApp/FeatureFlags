@@ -1,4 +1,5 @@
-export * from './FFModule';
-export * from './FFlipper';
+'use strict';
 
-declare module A { export enum E { X, Y, Z } }
+export { FFModule } from './FFModule';
+export {Feature} from './models/Feature';
+export { DEVICES }  from './Globals';

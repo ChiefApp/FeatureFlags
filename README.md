@@ -1,6 +1,6 @@
 # Feature Toggle Client
 
-version = 0.1.0
+version = 0.2.0
 
 Typescript/Javascript client library for,
 - Feature flags/toggles
@@ -62,7 +62,7 @@ var FFModule = require('FFModule')
 
 <hr>
 ## TODO: Custom offline class 
-    - Add a sample offlineFeatureLookup class to demonstrate this functionality
+    - Add a sample customFeatureLookup class to demonstrate this functionality
 <hr>
 
 
