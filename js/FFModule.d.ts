@@ -6,7 +6,6 @@ import { FFConfig } from './FFConfig';
 export declare class FFModule {
     feature: Feature;
     fflags: FeatureFlags;
-    isOffline: boolean;
     config: FFConfig;
     featureName: string;
     userID: string;

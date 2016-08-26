@@ -10,13 +10,11 @@ import { FFConfig } from './FFConfig';
 export class FFModule {
     feature: Feature;
     fflags: FeatureFlags;
-    isOffline: boolean = false;
     config: FFConfig;
     featureName: string;
     userID: string;
     featureLookupRepo: IFeatureLookup = undefined;
 
-    // test
     constructor(device: DEVICE, url: string, customFeatureLookup?: IFeatureLookup) {
         this.config = new FFConfig(device, url, customFeatureLookup);
     }
@@ -29,6 +27,7 @@ export class FFModule {
         userID?: string): Promise<Feature> {
         // check for custom feature lookup
         let apiFeatureLookup = new ApiFeatureLookup(this.config.url, this.config.device);
+
         if (this.config.customFeatureLookup !== undefined) {
             let feature = this.config.customFeatureLookup.getFeature(this.featureName, this.userID);
             feature.then(f => {

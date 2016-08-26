@@ -2,9 +2,7 @@
 const ApiFeatureLookup_1 = require('./ApiFeatureLookup');
 const FFConfig_1 = require('./FFConfig');
 class FFModule {
-    // test
     constructor(device, url, customFeatureLookup) {
-        this.isOffline = false;
         this.featureLookupRepo = undefined;
         this.config = new FFConfig_1.FFConfig(device, url, customFeatureLookup);
     }

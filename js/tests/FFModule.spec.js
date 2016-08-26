@@ -14,19 +14,12 @@ describe('FFModule:', () => {
         fetchMock.mock('*', JSON.stringify(searchFeature), { method: 'GET' });
     });
     it('should return a feature promise', (done) => {
-        let fflip = new FFModule_1.FFModule('search', '1', this.config);
-        fflip.isOffline = false;
-        fflip.getFeature().then(feature => {
+        let fflip = new FFModule_1.FFModule('WEB', 'http://localhost:1337', undefined);
+        fflip.getFeature('Search', '1').then(feature => {
             console.log(feature);
             expect(feature instanceof Feature_1.Feature).toBe(true);
             done();
         });
     });
-    // it('should return ApiFeatureLookup object if offline is false', () => {
-    //     let fflip = new FFModule('search', '1', this.config);
-    //     fflip.isOffline = false;
-    //     let featureLookup = fflip.getFeatureLookupRepo();
-    //     expect(featureLookup instanceof ApiFeatureLookup).toBe(true);
-    // });
 });
 //# sourceMappingURL=FFModule.spec.js.map
