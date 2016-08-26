@@ -1,12 +1,12 @@
-import { DEVICES } from './Globals';
+import { DEVICE } from './Globals';
 import { IFeatureLookup } from './IFeatureLookup';
 
 export class FFConfig {
-    device: DEVICES;
+    device: DEVICE;
     url: string; // url
     customFeatureLookup: IFeatureLookup;
 
-    constructor(device: DEVICES,
+    constructor(device: DEVICE,
                 url: string,
                 customFeatureLookup?: IFeatureLookup) {
         this.device = device;

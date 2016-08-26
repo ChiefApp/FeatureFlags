@@ -1,4 +1,4 @@
-import {DEVICES} from '../Globals';
+import {DEVICE} from '../Globals';
 import { Feature } from './Feature';
 
 export class FeatureGrouping {

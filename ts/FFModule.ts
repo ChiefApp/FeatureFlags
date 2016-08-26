@@ -4,7 +4,7 @@ import { FeatureGrouping } from './models/FeatureGrouping';
 import { FeatureFlags } from './models/FeatureFlags';
 import { IFeatureLookup } from './IFeatureLookup';
 import { ApiFeatureLookup } from './ApiFeatureLookup';
-import { DEVICES }  from './Globals';
+import { DEVICE }  from './Globals';
 import { FFConfig } from './FFConfig';
 
 export class FFModule {
@@ -17,10 +17,13 @@ export class FFModule {
     featureLookupRepo: IFeatureLookup = undefined;
 
     // test
-    constructor(device: DEVICES, url: string, customFeatureLookup?: IFeatureLookup) {
+    constructor(device: DEVICE, url: string, customFeatureLookup?: IFeatureLookup) {
         this.config = new FFConfig(device, url, customFeatureLookup);
     }
 
+    /**
+     * Get Feature
+     */
     getFeature(
         featureName: string,
         userID?: string): Promise<Feature> {
@@ -38,6 +41,9 @@ export class FFModule {
         }
     }
 
+    /**
+     * Get all enabled feature for a userID
+     */
     getEnabledFeaturesFor(userID): Promise<FeatureFlags> {
         let apiFeatureLookup = new ApiFeatureLookup(this.config.url, this.config.device);
         return apiFeatureLookup.getEnabledFeaturesFor(userID);
@@ -52,16 +58,24 @@ export class FFModule {
         });
     }
 
-     Feature(featureName: string, userID: string) {
-        return function (target: any, key: string) {
-             let _value = target[key];
+    /**
+     * Decorator function to assign Feature to a property
+     */
+    Feature(featureName: string, userID: string) {
+        return (target: any, key: string) => {
+          let _value = target[key];
+
+          // if there is no value assigned by default then assign a default
+          if (_value === '' || _value === undefined) {
+            _value = this.getFeature(featureName, userID);
+          }
 
           function getter() {
             return _value;
           }
 
           function setter(newValue) {
-            _value = this.getFeature(featureName, userID);
+            _value = newValue;
           }
 
           if (delete target[key]) {
@@ -73,9 +87,16 @@ export class FFModule {
         };
     }
 
+    /**
+     * Decorator function to check if a feature is enabled or disabled
+     */
     FeatureFEnabled(featureName: string, userID: string) {
-        return function (target: any, key: string) {
-             let _value = target[key];
+        return (target: any, key: string) => {
+          let _value = target[key];
+
+          if (_value === '' || _value === undefined) {
+            _value = this.getFeature(featureName, userID);
+          }
 
           function getter() {
             return _value;

@@ -1,4 +1,6 @@
 'use strict';
+const FFModule_1 = require('../FFModule');
+const Feature_1 = require('../models/Feature');
 const FFConfig_1 = require('../FFConfig');
 const fetchMock = require('fetch-mock');
 let searchFeature = { 'featureKey': 'Search',
@@ -11,15 +13,15 @@ describe('FFModule:', () => {
         this.config = new FFConfig_1.FFConfig('WEB', 'http://localhost:1337', undefined);
         fetchMock.mock('*', JSON.stringify(searchFeature), { method: 'GET' });
     });
-    // it('should return a feature promise', (done) => {
-    //     let fflip = new FFModule('search', '1', this.config);
-    //     fflip.isOffline = false;
-    //     fflip.getFeature().then(feature => {
-    //         console.log(feature);
-    //         expect(feature instanceof Feature).toBe(true);
-    //         done();
-    //     });
-    // });
+    it('should return a feature promise', (done) => {
+        let fflip = new FFModule_1.FFModule('search', '1', this.config);
+        fflip.isOffline = false;
+        fflip.getFeature().then(feature => {
+            console.log(feature);
+            expect(feature instanceof Feature_1.Feature).toBe(true);
+            done();
+        });
+    });
     // it('should return ApiFeatureLookup object if offline is false', () => {
     //     let fflip = new FFModule('search', '1', this.config);
     //     fflip.isOffline = false;

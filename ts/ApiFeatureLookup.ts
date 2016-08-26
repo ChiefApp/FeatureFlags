@@ -3,13 +3,13 @@ import { IFeatureLookup } from './IFeatureLookup';
 import { Feature } from './models/Feature';
 import { FeatureFlags } from './models/FeatureFlags';
 import 'isomorphic-fetch';
-import {DEVICES}  from './Globals';
+import {DEVICE}  from './Globals';
 
 export class ApiFeatureLookup implements IFeatureLookup {
     url: string;
-    device: DEVICES;
+    device: DEVICE;
 
-    constructor(url: string, device: DEVICES) {
+    constructor(url: string, device: DEVICE) {
         this.url = url;
         this.device = device;
     }

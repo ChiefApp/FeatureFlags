@@ -1,4 +1,4 @@
-import {DEVICES} from '../Globals';
+import {DEVICE} from '../Globals';
 import {FeatureGrouping} from './FeatureGrouping';
 import {Feature} from './Feature';
 

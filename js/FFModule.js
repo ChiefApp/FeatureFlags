@@ -8,6 +8,9 @@ class FFModule {
         this.featureLookupRepo = undefined;
         this.config = new FFConfig_1.FFConfig(device, url, customFeatureLookup);
     }
+    /**
+     * Get Feature
+     */
     getFeature(featureName, userID) {
         // check for custom feature lookup
         let apiFeatureLookup = new ApiFeatureLookup_1.ApiFeatureLookup(this.config.url, this.config.device);
@@ -23,6 +26,9 @@ class FFModule {
             return apiFeatureLookup.getFeature(this.featureName, this.userID);
         }
     }
+    /**
+     * Get all enabled feature for a userID
+     */
     getEnabledFeaturesFor(userID) {
         let apiFeatureLookup = new ApiFeatureLookup_1.ApiFeatureLookup(this.config.url, this.config.device);
         return apiFeatureLookup.getEnabledFeaturesFor(userID);
@@ -33,14 +39,21 @@ class FFModule {
             return (feature !== undefined && feature.enabled) ? true : false;
         });
     }
+    /**
+     * Decorator function to assign Feature to a property
+     */
     Feature(featureName, userID) {
-        return function (target, key) {
+        return (target, key) => {
             let _value = target[key];
+            // if there is no value assigned by default then assign a default
+            if (_value === '' || _value === undefined) {
+                _value = this.getFeature(featureName, userID);
+            }
             function getter() {
                 return _value;
             }
             function setter(newValue) {
-                _value = this.getFeature(featureName, userID);
+                _value = newValue;
             }
             if (delete target[key]) {
                 Object.defineProperty(target, key, {
@@ -50,9 +63,15 @@ class FFModule {
             }
         };
     }
+    /**
+     * Decorator function to check if a feature is enabled or disabled
+     */
     FeatureFEnabled(featureName, userID) {
-        return function (target, key) {
+        return (target, key) => {
             let _value = target[key];
+            if (_value === '' || _value === undefined) {
+                _value = this.getFeature(featureName, userID);
+            }
             function getter() {
                 return _value;
             }
