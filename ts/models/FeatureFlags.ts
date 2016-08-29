@@ -10,7 +10,7 @@ export class FeatureFlags {
         application: string,
         children: Array<Feature | FeatureGrouping>)
     {
-        this.application = name;
+        this.application = application;
         this.children = children;
     }
 
