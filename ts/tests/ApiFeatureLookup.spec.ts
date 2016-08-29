@@ -4,7 +4,7 @@
 import {Feature} from '../models/Feature';
 import {FeatureFlags} from '../models/FeatureFlags';
 import { ApiFeatureLookup } from '../ApiFeatureLookup';
-import {DEVICES }  from '../Globals';
+import {DEVICE }  from '../Globals';
 import { FFConfig } from '../FFConfig';
 import * as sinon from 'sinon';
 import * as fetchMock from 'fetch-mock';

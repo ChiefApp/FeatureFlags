@@ -1,14 +1,31 @@
-import { DEVICES } from './Globals';
 import { Feature } from './models/Feature';
 import { FeatureFlags } from './models/FeatureFlags';
-export declare namespace FFModule {
-    function config(device?: DEVICES, url?: string, offlineFeatureLookup?: any): void;
-    function isFeatureEnabled(featureName: string, userID: string): Promise<Boolean>;
-    function getFeature(featureName: string, userID?: string): Promise<Feature>;
-    function getEnabledFeaturesFor(featureName: string, userID?: string): Promise<FeatureFlags>;
+import { IFeatureLookup } from './IFeatureLookup';
+import { DEVICE } from './Globals';
+import { FFConfig } from './FFConfig';
+export declare class FFModule {
+    feature: Feature;
+    fflags: FeatureFlags;
+    config: FFConfig;
+    featureName: string;
+    userID: string;
+    featureLookupRepo: IFeatureLookup;
+    constructor(device: DEVICE, url: string, customFeatureLookup?: IFeatureLookup);
     /**
-     * Convenience decorator for projects using typescript
+     * Get Feature
      */
-    function Feature(featureName: string, userID: string): (target: any, key: string) => void;
-    function FeatureFEnabled(featureName: string, userID: string): (target: any, key: string) => void;
+    getFeature(featureName: string, userID?: string): Promise<Feature>;
+    /**
+     * Get all enabled feature for a userID
+     */
+    getEnabledFeaturesFor(userID: any): Promise<FeatureFlags>;
+    isFeatureEnabled(featureName: string, userID: string): Promise<Boolean>;
+    /**
+     * Decorator function to assign Feature to a property
+     */
+    Feature(featureName: string, userID: string): (target: any, key: string) => void;
+    /**
+     * Decorator function to check if a feature is enabled or disabled
+     */
+    FeatureFEnabled(featureName: string, userID: string): (target: any, key: string) => void;
 }

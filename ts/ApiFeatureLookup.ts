@@ -3,13 +3,13 @@ import { IFeatureLookup } from './IFeatureLookup';
 import { Feature } from './models/Feature';
 import { FeatureFlags } from './models/FeatureFlags';
 import 'isomorphic-fetch';
-import {DEVICES}  from './Globals';
+import {DEVICE}  from './Globals';
 
 export class ApiFeatureLookup implements IFeatureLookup {
     url: string;
-    device: DEVICES;
+    device: DEVICE;
 
-    constructor(url: string, device: DEVICES) {
+    constructor(url: string, device: DEVICE) {
         this.url = url;
         this.device = device;
     }
@@ -31,7 +31,7 @@ export class ApiFeatureLookup implements IFeatureLookup {
     }
 
     getFeature(featureName: string, userID: string): Promise<Feature> {
-        let apiURL = this.url + `/feature/${featureName}?device=${this.device}&user_id=${userID}`;
+        let apiURL = this.url + `/${featureName}?device=${this.device}&user_id=${userID}`;
         return fetch(apiURL, {  method: 'get', cache: 'no-cache'})
                 .then(this.handleErrors)
                 .then(function(response) {

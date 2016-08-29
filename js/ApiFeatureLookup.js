@@ -23,7 +23,7 @@ class ApiFeatureLookup {
         });
     }
     getFeature(featureName, userID) {
-        let apiURL = this.url + `/feature/${featureName}?device=${this.device}&user_id=${userID}`;
+        let apiURL = this.url + `/${featureName}?device=${this.device}&user_id=${userID}`;
         return fetch(apiURL, { method: 'get', cache: 'no-cache' })
             .then(this.handleErrors)
             .then(function (response) {

@@ -1,8 +1,8 @@
-import { DEVICES } from './Globals';
+import { DEVICE } from './Globals';
 import { IFeatureLookup } from './IFeatureLookup';
 export declare class FFConfig {
-    device: DEVICES;
+    device: DEVICE;
     url: string;
-    offlineFeatureLookup: IFeatureLookup;
-    constructor(device: DEVICES, url: string, offlineFeatureLookup?: IFeatureLookup);
+    customFeatureLookup: IFeatureLookup;
+    constructor(device: DEVICE, url: string, customFeatureLookup?: IFeatureLookup);
 }

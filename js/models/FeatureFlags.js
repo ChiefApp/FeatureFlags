@@ -3,7 +3,7 @@ const FeatureGrouping_1 = require('./FeatureGrouping');
 const Feature_1 = require('./Feature');
 class FeatureFlags {
     constructor(application, children) {
-        this.application = name;
+        this.application = application;
         this.children = children;
     }
     static fromJSON(json) {

@@ -1,42 +1,57 @@
-"use strict";
-const FFlipper_1 = require('./FFlipper');
+'use strict';
+const ApiFeatureLookup_1 = require('./ApiFeatureLookup');
 const FFConfig_1 = require('./FFConfig');
-var FFModule;
-(function (FFModule) {
-    let ffconfig;
-    function config(device = 'WEB', url = 'http://localhost', offlineFeatureLookup = null) {
-        this.ffconfig = new FFConfig_1.FFConfig(device, url, offlineFeatureLookup);
+class FFModule {
+    constructor(device, url, customFeatureLookup) {
+        this.featureLookupRepo = undefined;
+        this.config = new FFConfig_1.FFConfig(device, url, customFeatureLookup);
     }
-    FFModule.config = config;
-    function isFeatureEnabled(featureName, userID) {
-        let fflipper = new FFlipper_1.default(featureName, userID, this.FFConfig);
-        let featurePromise = fflipper.getFeature();
+    /**
+     * Get Feature
+     */
+    getFeature(featureName, userID) {
+        // check for custom feature lookup
+        let apiFeatureLookup = new ApiFeatureLookup_1.ApiFeatureLookup(this.config.url, this.config.device);
+        if (this.config.customFeatureLookup !== undefined) {
+            let feature = this.config.customFeatureLookup.getFeature(featureName, this.userID);
+            feature.then(f => {
+                return apiFeatureLookup.getFeature(featureName, userID);
+            }).catch(err => {
+                console.error('Error when trying to get a feature from CustomFeatureLookup class ' + err);
+            });
+        }
+        else {
+            return apiFeatureLookup.getFeature(featureName, userID);
+        }
+    }
+    /**
+     * Get all enabled feature for a userID
+     */
+    getEnabledFeaturesFor(userID) {
+        let apiFeatureLookup = new ApiFeatureLookup_1.ApiFeatureLookup(this.config.url, this.config.device);
+        return apiFeatureLookup.getEnabledFeaturesFor(userID);
+    }
+    isFeatureEnabled(featureName, userID) {
+        let featurePromise = this.getFeature(featureName, userID);
         return featurePromise.then(feature => {
             return (feature !== undefined && feature.enabled) ? true : false;
         });
     }
-    FFModule.isFeatureEnabled = isFeatureEnabled;
-    function getFeature(featureName, userID) {
-        let fflipper = new FFlipper_1.default(featureName, userID, this.FFConfig);
-        return fflipper.getFeature();
-    }
-    FFModule.getFeature = getFeature;
-    function getEnabledFeaturesFor(featureName, userID) {
-        let fflipper = new FFlipper_1.default(featureName, userID, this.FFConfig);
-        return fflipper.getEnabledFeatures();
-    }
-    FFModule.getEnabledFeaturesFor = getEnabledFeaturesFor;
     /**
-     * Convenience decorator for projects using typescript
+     * Decorator function to assign Feature to a property
      */
-    function Feature(featureName, userID) {
-        return function (target, key) {
+    Feature(featureName, userID) {
+        return (target, key) => {
             let _value = target[key];
+            // if there is no value assigned by default then assign a default
+            if (_value === '' || _value === undefined) {
+                _value = this.getFeature(featureName, userID);
+            }
             function getter() {
                 return _value;
             }
             function setter(newValue) {
-                _value = getFeature(featureName, userID);
+                _value = newValue;
             }
             if (delete target[key]) {
                 Object.defineProperty(target, key, {
@@ -46,15 +61,20 @@ var FFModule;
             }
         };
     }
-    FFModule.Feature = Feature;
-    function FeatureFEnabled(featureName, userID) {
-        return function (target, key) {
+    /**
+     * Decorator function to check if a feature is enabled or disabled
+     */
+    FeatureFEnabled(featureName, userID) {
+        return (target, key) => {
             let _value = target[key];
+            if (_value === '' || _value === undefined) {
+                _value = this.getFeature(featureName, userID);
+            }
             function getter() {
                 return _value;
             }
             function setter(newValue) {
-                _value = isFeatureEnabled(featureName, userID);
+                _value = this.isFeatureEnabled(featureName, userID);
             }
             if (delete target[key]) {
                 Object.defineProperty(target, key, {
@@ -64,6 +84,6 @@ var FFModule;
             }
         };
     }
-    FFModule.FeatureFEnabled = FeatureFEnabled;
-})(FFModule = exports.FFModule || (exports.FFModule = {}));
+}
+exports.FFModule = FFModule;
 //# sourceMappingURL=FFModule.js.map
