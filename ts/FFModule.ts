@@ -29,14 +29,14 @@ export class FFModule {
         let apiFeatureLookup = new ApiFeatureLookup(this.config.url, this.config.device);
 
         if (this.config.customFeatureLookup !== undefined) {
-            let feature = this.config.customFeatureLookup.getFeature(this.featureName, this.userID);
+            let feature = this.config.customFeatureLookup.getFeature(featureName, this.userID);
             feature.then(f => {
-                return apiFeatureLookup.getFeature(this.featureName, this.userID);
+                return apiFeatureLookup.getFeature(featureName, userID);
             }).catch(err => {
                 console.error('Error when trying to get a feature from CustomFeatureLookup class ' + err);
             });
         } else {
-            return apiFeatureLookup.getFeature(this.featureName, this.userID);
+            return apiFeatureLookup.getFeature(featureName, userID);
         }
     }
 
