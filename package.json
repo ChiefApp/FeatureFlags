@@ -1,8 +1,8 @@
 {
   "name": "ffmodule",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "",
-  "main": "js/FFModule.js",
+  "main": "js/index.js",
   "dependencies": {
     "dts-bundle": "^0.4.3",
     "es6-promise": "^3.2.1",
@@ -47,5 +47,5 @@
   },
   "typings": "js/index",
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

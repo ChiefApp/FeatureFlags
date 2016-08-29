@@ -1,4 +1,4 @@
-import {DEVICES} from '../Globals';
+import {DEVICE} from '../Globals';
 import {FeatureGrouping} from './FeatureGrouping';
 import {Feature} from './Feature';
 
@@ -10,7 +10,7 @@ export class FeatureFlags {
         application: string,
         children: Array<Feature | FeatureGrouping>)
     {
-        this.application = name;
+        this.application = application;
         this.children = children;
     }
 

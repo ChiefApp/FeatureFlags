@@ -1,3 +1,3 @@
-export type DEVICES = "WEB" | "IOS" | "ANDROID" | "WINDOWS"
+export type DEVICE = "WEB" | "IOS" | "ANDROID" | "WINDOWS"
 
 

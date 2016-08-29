@@ -15,6 +15,7 @@
         "jspm_packages",
         "typings/**",
         "node_modules/rxjs/Observable.d.ts",
-        "typings"
+        "typings",
+        "js"
     ]
 }

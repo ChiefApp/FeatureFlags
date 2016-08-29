@@ -1,17 +1,17 @@
-import { DEVICES } from './Globals';
+import { DEVICE } from './Globals';
 import { IFeatureLookup } from './IFeatureLookup';
 
 export class FFConfig {
-    device: DEVICES;
+    device: DEVICE;
     url: string; // url
-    offlineFeatureLookup: IFeatureLookup;
+    customFeatureLookup: IFeatureLookup;
 
-    constructor(device: DEVICES = 'WEB',
+    constructor(device: DEVICE,
                 url: string,
-                offlineFeatureLookup?: IFeatureLookup) {
+                customFeatureLookup?: IFeatureLookup) {
         this.device = device;
         this.url = url;
-        this.offlineFeatureLookup = offlineFeatureLookup;
+        this.customFeatureLookup = customFeatureLookup;
     }
 
 }

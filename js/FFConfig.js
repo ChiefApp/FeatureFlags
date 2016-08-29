@@ -1,9 +1,9 @@
 "use strict";
 class FFConfig {
-    constructor(device = 'WEB', url, offlineFeatureLookup) {
+    constructor(device, url, customFeatureLookup) {
         this.device = device;
         this.url = url;
-        this.offlineFeatureLookup = offlineFeatureLookup;
+        this.customFeatureLookup = customFeatureLookup;
     }
 }
 exports.FFConfig = FFConfig;

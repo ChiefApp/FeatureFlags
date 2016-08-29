@@ -1,1 +1,1 @@
-export declare type DEVICES = "WEB" | "IOS" | "ANDROID" | "WINDOWS";
+export declare type DEVICE = "WEB" | "IOS" | "ANDROID" | "WINDOWS";
